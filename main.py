@@ -12,6 +12,5 @@ class Main:
         stock.predict()
         stock.print()
 
-#Test
 main = Main(str(argv[1]))
 main.run(int(argv[2]))
