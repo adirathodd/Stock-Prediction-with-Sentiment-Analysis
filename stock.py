@@ -7,6 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential # type: ignore
 from tensorflow.keras.layers import LSTM, Dense # type: ignore
 from tensorflow.keras.optimizers import Adam # type: ignore
+import os
 
 class Stock:
     def __init__(self, ticker):
@@ -119,6 +120,13 @@ class Stock:
         
         
     def print(self):
-        print("-" * 150)
-        print(self.data, end="\n" + "-" * 150)
-        print("Predicted next day's price:", self.prediction, end="\n" + "-" * 150)
+        # Get the width of the terminal
+        terminal_size = os.get_terminal_size().columns
+
+        # Create the dashed line
+        dashed_line = '-' * terminal_size
+        print(dashed_line)
+        print(self.data)
+        print(dashed_line)
+        print("Predicted next day's price:", self.prediction)
+        print(dashed_line)
