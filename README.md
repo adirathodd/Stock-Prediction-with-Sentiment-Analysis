@@ -1,6 +1,6 @@
 # How to use
 
-On command line - python3 main.py {ticker} {window_size}
+On command line - python3 main.py {ticker}
 
 # Project Description
 
