@@ -9,6 +9,7 @@ class Main:
         stock = Stock(self.ticker)
         stock.create(window)
         stock.sentiment_analysis()
+        stock.predict()
         stock.print()
 
 #Test
