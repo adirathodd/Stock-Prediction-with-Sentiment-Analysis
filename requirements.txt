@@ -4,3 +4,5 @@ numpy
 tensorflow
 scikit-learn
 selenium
+transformers
+torch
