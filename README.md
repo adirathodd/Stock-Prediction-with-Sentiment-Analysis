@@ -2,6 +2,8 @@
 
 On command line - python3 main.py {ticker}
 
+![Sample Output of AAPL](output.JPG)
+
 # Project Description
 
 ## Overview
