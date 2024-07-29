@@ -4,7 +4,8 @@ import pandas as pd
 from selenium.webdriver.chrome.options import Options
 from datetime import datetime, timedelta
 import time
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from transformers import pipeline
+import torch
 
 # Set up the Chrome driver
 chrome_options = Options()
@@ -52,13 +53,26 @@ def scroll_to_bottom(driver):
         last_height = new_height
 
 def sentiment_analysis(news_df):
-    vader = SentimentIntensityAnalyzer()
-    compounds = []
-    for i, row in news_df.iterrows():
-        compound = vader.polarity_scores(row['Title'])['compound']
-        compounds.append(compound)
+    def helper(title):
+        # Load the sentiment-analysis pipeline
+        model_name = "distilbert-base-uncased-finetuned-sst-2-english"
+        device = 0 if torch.backends.mps.is_available() else -1
 
-    news_df.loc[:, 'Compound'] = compounds
+        sentiment_pipeline = pipeline("sentiment-analysis", model=model_name, device=device)
+        analysis = sentiment_pipeline(title)
+        if analysis[0]['label'] == 'NEGATIVE':
+            return (-1 * analysis[0]['score'])
+        else:
+            return analysis[0]['score']
+
+    titles = news_df['Title'].tolist()
+
+    res = []
+
+    for title in titles:
+        res.append(helper(title))
+
+    news_df['Sentiment Score'] = res
     return news_df
 
 def scrape_yahoo_finance(stock_symbol):
@@ -82,5 +96,5 @@ def scrape_yahoo_finance(stock_symbol):
     driver.quit()
 
     df = pd.DataFrame(news_list, columns=['Date', 'Title'])
-
+ 
     return sentiment_analysis(df)

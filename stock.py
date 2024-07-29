@@ -5,7 +5,7 @@ from yahoo import scrape_yahoo_finance
 from datetime import datetime, timedelta
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential # type: ignore
-from tensorflow.keras.layers import LSTM, Dense # type: ignore
+from tensorflow.keras.layers import LSTM, Dense, Input # type: ignore
 from tensorflow.keras.optimizers import Adam # type: ignore
 import os
 
@@ -67,8 +67,7 @@ class Stock:
     def sentiment_analysis(self):
         try:
             news_df = scrape_yahoo_finance(self.ticker)
-            average_compound_df = news_df.groupby('Date', as_index=False).agg({'Compound': 'mean'})
-            average_compound_df.rename(columns={'Compound': 'Average Sentiment Analysis Score'}, inplace=True)
+            average_compound_df = news_df.groupby('Date', as_index=False).agg({'Sentiment Score': 'mean'})
             self.sentiment = average_compound_df
             self.sentiment['Date'] = pd.to_datetime(self.sentiment['Date'])
             self.data['Date'] = pd.to_datetime(self.data['Date'])
@@ -78,7 +77,7 @@ class Stock:
 
     def predict(self):
         # Feature selection
-        df_features = self.data[['Average Sentiment Analysis Score', 'Volume', 'Moving Average', 'RSI', 'Close']]
+        df_features = self.data[['Sentiment Score', 'Volume', 'Moving Average', 'RSI', 'Close']]
 
         # Normalize the data
         scaler = MinMaxScaler()
@@ -102,11 +101,11 @@ class Stock:
         y = np.array(y)
 
         model = Sequential([
-            LSTM(50, return_sequences=True, input_shape=(seq_length, X.shape[-1])),
+            Input(shape=(seq_length, X.shape[-1])),
+            LSTM(50, return_sequences=True),
             LSTM(50),
             Dense(1)
         ])
-
         model.compile(optimizer=Adam(learning_rate=0.001), loss='mean_squared_error')
 
         model.fit(X, y, epochs=50, batch_size=1, verbose=0)

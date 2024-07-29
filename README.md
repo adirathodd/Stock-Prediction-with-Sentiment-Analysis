@@ -33,4 +33,4 @@ File: yahoo.py
 This file contains functions for:
 
 Web Scraping: Uses Selenium and BeautifulSoup to scrape news articles from Yahoo Finance.
-Sentiment Analysis: Applies the VADER sentiment analysis tool to extract sentiment scores from news titles.
+Sentiment Analysis: Applies the DistilBERT base uncased finetuned SST-2 sentiment analysis tool to extract sentiment scores from news titles.
