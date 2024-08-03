@@ -1,8 +1,16 @@
 # How to use
 
-On command line - python3 main.py {ticker}
+On command line - python3 main1.py {ticker}
 
 ![Sample Output of AAPL](output.JPG)
+
+React app:
+
+> start npm
+
+> uvicorn main:app --reload
+
+Go to http://localhost:3000
 
 # Project Description
 

@@ -11,7 +11,7 @@ import os
 
 class Stock:
     def __init__(self, ticker):
-        self.ticker = ticker
+        self.ticker = ticker.upper()
         self.data = None
         self.sentiment = None
         self.prediction = None
@@ -20,6 +20,8 @@ class Stock:
         self.set_data()
         self.create_mva(window)
         self.create_rsi(window)
+        self.data.dropna(inplace=True)
+        self.data.reset_index(inplace=True)
         self.data = self.data.drop(columns=["index"])
     
     def set_data(self):
@@ -44,7 +46,6 @@ class Stock:
     def create_mva(self, window):
         try:
             self.data.loc[:, 'Moving Average'] = self.data.loc[:, 'Close'].rolling(window=window).mean()
-            self.data.dropna(inplace=True)
         except Exception as e:
             print(str(e))
     
@@ -58,8 +59,6 @@ class Stock:
             rs = avg_gain / avg_loss
             rsi = 100 - (100 / (1 + rs))
             self.data.loc[:, "RSI"] = rsi
-            self.data.dropna(inplace=True)
-            self.data.reset_index(inplace=True)
         except Exception as e:
             print(str(e))
 
@@ -115,8 +114,7 @@ class Stock:
         last_sequence = np.expand_dims(last_sequence, axis=0)
         predicted_price = model.predict(last_sequence, verbose=0)
         predicted_price = scaler.inverse_transform(np.concatenate((np.zeros((1, X.shape[-1] - 1)), predicted_price), axis=1))[:, -1]
-        self.prediction = predicted_price[0]
-        
+        self.prediction = predicted_price[0]      
         
     def print(self):
         # Get the width of the terminal
