@@ -6,3 +6,7 @@ scikit-learn
 selenium
 transformers
 torch
+npm
+asyncio
+fastapi
+React
