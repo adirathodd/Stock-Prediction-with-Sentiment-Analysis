@@ -11,6 +11,6 @@ services:
     name: frontend
     env: node
     region: ohio
-    buildCommand: cd frontend && npm install && npm run build
+    buildCommand: cd frontend && npm install && cd frontend && npm run build
     startCommand: cd frontend && npx serve -s build
     plan: free
