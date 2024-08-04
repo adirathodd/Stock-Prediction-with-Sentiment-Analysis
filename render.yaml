@@ -6,20 +6,11 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port 8000
     plan: free
-    buildScript:
-      - pip install -r requirements.txt
-    startScript:
-      - uvicorn main:app --host 0.0.0.0 --port 8000
 
   - type: web
     name: frontend
     env: node
     region: ohio
     buildCommand: npm install && npm run build
-    startCommand: serve -s build
+    startCommand: npx serve -s build
     plan: free
-    buildScript:
-      - npm install
-      - npm run build
-    startScript:
-      - npx serve -s build
