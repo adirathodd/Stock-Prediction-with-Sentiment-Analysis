@@ -2,6 +2,6 @@
     name: frontend
     env: node
     plan: free
-    buildCommand: "yarn build"
-    startCommand: "yarn start"
+    buildCommand: "npm run build"
+    startCommand: "npm start"
     repoPath: frontend
