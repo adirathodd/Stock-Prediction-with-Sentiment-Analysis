@@ -1,18 +1,16 @@
 services:
   - type: web
     name: backend
-    env: docker
+    env: python
     plan: free
-    dockerfilePath: backend/Dockerfile
     buildCommand: ""
-    startCommand: ""
-    healthCheckPath: "/"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    repoPath: backend
 
   - type: web
     name: frontend
-    env: docker
+    env: node
     plan: free
-    dockerfilePath: frontend/Dockerfile
-    buildCommand: ""
-    startCommand: ""
-    healthCheckPath: "/"
+    buildCommand: "yarn build"
+    startCommand: "yarn start"
+    repoPath: frontend
