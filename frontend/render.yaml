@@ -1,7 +1,0 @@
-  - type: web
-    name: frontend
-    env: node
-    plan: free
-    buildCommand: "npm run build"
-    startCommand: "npm start"
-    repoPath: frontend
