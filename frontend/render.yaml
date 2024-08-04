@@ -1,0 +1,7 @@
+  - type: web
+    name: frontend
+    env: node
+    plan: free
+    buildCommand: "yarn build"
+    startCommand: "yarn start"
+    repoPath: frontend
