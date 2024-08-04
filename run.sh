@@ -1,10 +1,10 @@
-cd -
+cd ..
 
 cd frontend
 
 npm run build
 
-cd -
+cd ..
 
 cd backend
 
