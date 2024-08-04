@@ -3,6 +3,7 @@ services:
     name: backend
     env: python
     region: ohio
+    workingDirectory: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port 8000
     plan: free
@@ -11,6 +12,7 @@ services:
     name: frontend
     env: node
     region: ohio
+    workingDirectory: frontend
     buildCommand: npm install && npm run build
     startCommand: npx serve -s build
     plan: free
