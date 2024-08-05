@@ -7,6 +7,7 @@ astunparse==1.6.3
 attrs==23.2.0
 beautifulsoup4==4.12.3
 bidict==0.23.1
+build==1.2.1
 certifi==2024.7.4
 charset-normalizer==3.3.2
 click==8.1.7
@@ -70,6 +71,7 @@ parso==0.8.4
 peewee==3.17.6
 pexpect==4.9.0
 pillow==10.4.0
+pip-tools==7.4.1
 platformdirs==4.2.2
 playwright==1.45.0
 prompt_toolkit==3.0.47
@@ -82,13 +84,16 @@ pydantic_core==2.20.1
 pyee==11.1.0
 Pygments==2.18.0
 pyparsing==3.1.2
+pyproject_hooks==1.1.0
 PySocks==1.7.1
 python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
 python-engineio==4.9.1
 python-socketio==5.11.3
 pytz==2024.1
 PyYAML==6.0.1
 pyzmq==26.0.3
+react==4.3.0
 regex==2024.5.15
 requests==2.32.3
 rich==13.7.1
@@ -126,6 +131,7 @@ tzdata==2024.1
 urllib3==2.2.2
 uvicorn==0.30.5
 wcwidth==0.2.13
+webdriver-manager==4.0.2
 webencodings==0.5.1
 websocket-client==1.8.0
 Werkzeug==3.0.3
