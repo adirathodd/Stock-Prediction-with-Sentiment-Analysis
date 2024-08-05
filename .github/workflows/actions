@@ -23,12 +23,12 @@ jobs:
         cd backend
         pip install -r requirements.txt
 
-    - name: Deploy to Render (Backend)
-      env:
-        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+    - name: Deploy Backend
+
       run: |
         cd backend
-        render services update backend-service-id --envfile .env --service-name backend --branch main
+        uvicorn main:app --host 0.0.0.0 --port 8000
+        echo "Deploying backend..."
 
   build-and-deploy-frontend:
     runs-on: ubuntu-latest
@@ -52,9 +52,10 @@ jobs:
         cd frontend
         npm run build
 
-    - name: Deploy to Render (Frontend)
+    - name: Deploy Frontend
       env:
-        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        # Add any necessary environment variables here
       run: |
         cd frontend
-        render services update frontend-service-id --envfile .env --service-name frontend --branch main
+        npx serve -s build
+        echo "Deploying frontend..."
