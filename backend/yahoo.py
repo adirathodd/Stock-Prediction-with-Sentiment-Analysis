@@ -6,14 +6,18 @@ from datetime import datetime, timedelta
 import time
 from transformers import pipeline
 import torch
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Set up the Chrome driver
 chrome_options = Options()
 chrome_options.add_argument("--headless")  # Run in headless mode
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
 
-driver = webdriver.Chrome(options=chrome_options)  
+# Initialize the WebDriver
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
 
 def convert_relative_time_to_dates(description):
     now = datetime.now()
