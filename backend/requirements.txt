@@ -59,7 +59,7 @@ namex==0.0.8
 nest-asyncio==1.6.0
 networkx==3.3
 newsapi-python==0.2.7
-nltk==3.8.1
+nltk==3.9
 npm==0.1.1
 npx==0.1.6
 numpy==1.26.4
