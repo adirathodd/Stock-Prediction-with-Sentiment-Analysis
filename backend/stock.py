@@ -68,7 +68,6 @@ class Stock:
             news_df = scrape_yahoo_finance(self.ticker)
             average_compound_df = news_df.groupby('Date', as_index=False).agg({'Sentiment Score': 'mean'})
             self.sentiment = average_compound_df
-            print(self.sentiment)
             self.sentiment['Date'] = pd.to_datetime(self.sentiment['Date'])
             self.data['Date'] = pd.to_datetime(self.data['Date'])
             self.data = pd.merge(self.sentiment, self.data, on='Date', how='inner')
