@@ -6,7 +6,7 @@ On command line - python3 main1.py {ticker}
 
 React app:
 
-> start npm
+> npm start
 
 > uvicorn main:app --reload
 
